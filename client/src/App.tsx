@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import { useEffect } from "react";
+import { Analytics } from "@vercel/analytics/react"
 
 function Router() {
   return (
@@ -29,6 +30,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router />
       <Toaster />
+      <Analytics />
     </QueryClientProvider>
   );
 }
