@@ -41,8 +41,23 @@ export function RepositoryStack({ repositories: initialRepositories }: Repositor
       }
     };
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        handleNavigation('down');
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        handleNavigation('up');
+      }
+    };
+
     window.addEventListener('wheel', handleWheel);
-    return () => window.removeEventListener('wheel', handleWheel);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [handleNavigation]);
 
   if (!repositories.length) return null;
