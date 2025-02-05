@@ -3,10 +3,16 @@ import { Card } from "@/components/ui/card";
 import { RepositoryStack } from "@/components/repository-stack";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { type Repository } from "@/lib/api-types";
+import { fetchGitHubRepos } from "@/lib/github";
 
 export default function Home() {
   const { data: repositories, isLoading, error } = useQuery<Repository[]>({
-    queryKey: ["/api/repositories"],
+    queryKey: ["github-repos"],
+    queryFn: async () => {
+      const promises = [1, 2, 3].map(page => fetchGitHubRepos(page));
+      const results = await Promise.all(promises);
+      return results.flat();
+    }
   });
 
   if (isLoading) {
