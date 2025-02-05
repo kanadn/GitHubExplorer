@@ -1,6 +1,8 @@
 import { type Repository } from "./api-types";
 
-const GITHUB_API = "https://api.github.com";
+const GITHUB_API = import.meta.env.VITE_GITHUB_API_URL;
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN; // Load from environment
+
 
 export async function fetchGitHubRepos(page: number): Promise<Repository[]> {
   const res = await fetch(
@@ -8,7 +10,8 @@ export async function fetchGitHubRepos(page: number): Promise<Repository[]> {
     {
       headers: {
         "Accept": "application/vnd.github.v3+json",
-        "User-Agent": "GitHub-Repository-Viewer"
+        "User-Agent": "GitHub-Repository-Viewer",
+        ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}) // Add token if available
       }
     }
   );

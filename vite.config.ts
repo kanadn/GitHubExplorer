@@ -1,23 +1,25 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
-import path, { dirname } from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
-import { fileURLToPath } from "url";
+import path from "path";
+import dotenv from "dotenv";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+dotenv.config();  // Load .env variables
+
 export default defineConfig({
-  plugins: [react(), runtimeErrorOverlay(), themePlugin()],
+  plugins: [react(), themePlugin()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
-      "@shared": path.resolve(__dirname, "shared"),
     },
   },
-  root: path.resolve(__dirname, "client"),
+  root: "client",
   build: {
-    outDir: path.resolve(__dirname, "dist/public"),
+    outDir: "dist",
     emptyOutDir: true,
+  },
+  define: {
+    "import.meta.env.VITE_GITHUB_TOKEN": JSON.stringify(process.env.VITE_GITHUB_TOKEN),
+    "import.meta.env.VITE_GITHUB_API_URL": JSON.stringify(process.env.VITE_GITHUB_API_URL),
   },
 });
