@@ -48,7 +48,7 @@ export function RepositoryStack({ repositories: initialRepositories }: Repositor
   if (!repositories.length) return null;
 
   return (
-    <div {...handlers} className="relative w-[90vw] max-w-[450px] h-[70vh] max-h-[750px] md:w-[450px] md:h-[750px]">
+    <div {...handlers} className="relative w-[90vw] max-w-[600px] h-[60vh] max-h-[500px] md:w-[600px] md:h-[500px]">
       <AnimatePresence>
         <RepositoryCard
           key={repositories[currentIndex].id}

@@ -20,13 +20,13 @@ export function RepositoryCard({ repository, style }: RepositoryCardProps) {
     >
       <Card className="w-full h-full overflow-hidden">
         <CardContent className="p-6 h-full flex flex-col">
-          <div className="mb-4 flex items-center">
+          <div className="flex items-center space-x-4 mb-4">
             <img
               src={repository.owner.avatarUrl}
               alt={repository.owner.login}
               className="w-12 h-12 md:w-16 md:h-16 rounded-full"
             />
-            <div className="ml-4 flex-grow">
+            <div className="flex-grow min-w-0">
               <h2 className="font-semibold text-lg md:text-xl truncate">{repository.name}</h2>
               <p className="text-muted-foreground text-sm truncate">by {repository.owner.login}</p>
             </div>
@@ -34,18 +34,18 @@ export function RepositoryCard({ repository, style }: RepositoryCardProps) {
               href={repository.htmlUrl} 
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 p-2 hover:bg-accent rounded-full transition-colors"
+              className="p-2 hover:bg-accent rounded-full transition-colors flex-shrink-0"
               onClick={(e) => e.stopPropagation()}
             >
               <ExternalLink className="text-muted-foreground w-5 h-5" />
             </a>
           </div>
 
-          <p className="text-muted-foreground mb-4 line-clamp-4 flex-grow-0">
+          <p className="text-muted-foreground text-sm md:text-base line-clamp-3 mb-auto">
             {repository.description || "No description available"}
           </p>
 
-          <div className="flex gap-4 md:gap-6 mt-auto">
+          <div className="flex justify-between items-center mt-4 md:mt-6">
             <div className="flex items-center gap-2">
               <Star className="text-yellow-500 w-5 h-5" />
               <span className="font-medium text-sm md:text-base">
