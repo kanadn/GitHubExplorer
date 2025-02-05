@@ -10,8 +10,8 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="w-[350px] h-[600px] flex items-center justify-center">
+      <div className="min-h-screen w-full flex items-center justify-center p-4">
+        <Card className="w-[90vw] max-w-[450px] h-[70vh] max-h-[750px] md:w-[450px] md:h-[750px] flex items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
         </Card>
       </div>
@@ -20,8 +20,8 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="w-[350px] h-[600px] p-6 flex items-center justify-center">
+      <div className="min-h-screen w-full flex items-center justify-center p-4">
+        <Card className="w-[90vw] max-w-[450px] h-[70vh] max-h-[750px] md:w-[450px] md:h-[750px] p-6 flex items-center justify-center">
           <div className="text-center">
             <h2 className="text-xl font-semibold mb-2">Error</h2>
             <p className="text-muted-foreground">{(error as Error).message}</p>
@@ -33,8 +33,8 @@ export default function Home() {
 
   if (!repositories?.length) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="w-[350px] h-[600px] p-6 flex items-center justify-center">
+      <div className="min-h-screen w-full flex items-center justify-center p-4">
+        <Card className="w-[90vw] max-w-[450px] h-[70vh] max-h-[750px] md:w-[450px] md:h-[750px] p-6 flex items-center justify-center">
           <p className="text-muted-foreground">No repositories found</p>
         </Card>
       </div>
@@ -42,7 +42,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="min-h-screen w-full flex items-center justify-center bg-background p-4">
       <RepositoryStack repositories={repositories} />
     </div>
   );

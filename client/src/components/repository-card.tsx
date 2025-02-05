@@ -9,10 +9,6 @@ interface RepositoryCardProps {
 }
 
 export function RepositoryCard({ repository, style }: RepositoryCardProps) {
-  const handleClick = () => {
-    window.open(repository.htmlUrl, "_blank");
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -22,41 +18,49 @@ export function RepositoryCard({ repository, style }: RepositoryCardProps) {
       style={style}
       className="absolute w-full h-full"
     >
-      <Card className="w-[350px] h-[600px] overflow-hidden cursor-pointer" onClick={handleClick}>
+      <Card className="w-full h-full overflow-hidden">
         <CardContent className="p-6 h-full flex flex-col">
-          <div className="mb-6 flex items-center">
+          <div className="mb-4 flex items-center">
             <img
               src={repository.owner.avatarUrl}
               alt={repository.owner.login}
-              className="w-16 h-16 rounded-full"
+              className="w-12 h-12 md:w-16 md:h-16 rounded-full"
             />
-            <div className="ml-4">
-              <h2 className="font-semibold text-xl">{repository.name}</h2>
-              <p className="text-muted-foreground text-sm">by {repository.owner.login}</p>
+            <div className="ml-4 flex-grow">
+              <h2 className="font-semibold text-lg md:text-xl truncate">{repository.name}</h2>
+              <p className="text-muted-foreground text-sm truncate">by {repository.owner.login}</p>
             </div>
-            <ExternalLink className="ml-auto text-muted-foreground" />
+            <a 
+              href={repository.htmlUrl} 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 p-2 hover:bg-accent rounded-full transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ExternalLink className="text-muted-foreground w-5 h-5" />
+            </a>
           </div>
 
-          <p className="text-muted-foreground mb-6 flex-grow">
+          <p className="text-muted-foreground mb-4 line-clamp-4 flex-grow-0">
             {repository.description || "No description available"}
           </p>
 
-          <div className="flex gap-6">
+          <div className="flex gap-4 md:gap-6 mt-auto">
             <div className="flex items-center gap-2">
-              <Star className="text-yellow-500" />
-              <span className="font-medium">
+              <Star className="text-yellow-500 w-5 h-5" />
+              <span className="font-medium text-sm md:text-base">
                 {repository.stargazersCount.toLocaleString()}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <GitFork className="text-blue-500" />
-              <span className="font-medium">
+              <GitFork className="text-blue-500 w-5 h-5" />
+              <span className="font-medium text-sm md:text-base">
                 {repository.forksCount.toLocaleString()}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <AlertCircle className="text-red-500" />
-              <span className="font-medium">
+              <AlertCircle className="text-red-500 w-5 h-5" />
+              <span className="font-medium text-sm md:text-base">
                 {repository.openIssuesCount.toLocaleString()}
               </span>
             </div>
